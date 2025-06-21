@@ -1,75 +1,57 @@
-# Kali Linux Desktop on the Browser
+ブラウザで動くKali Linuxデスクトップ
+このリポジトリには、NoVNCを通じてウェブブラウザからアクセス可能なKali Linuxデスクトップを実行するDocker Composeアプリケーションが含まれています。
 
-This repository contains a Docker Compose application that runs a Kali Linux desktop accessible through your web browser via NoVNC.
+スクリーンショット
 
-![Screenshot](.github/images/screenshoot.png)
+説明
+このDocker Composeアプリケーションは以下を提供します：
 
-## Description
+Kali Linux: NoVNCで動作するKali Linuxデスクトップ環境のウェブサーバー
+デフォルトパスワード: kalilinux
+デフォルト公開ポート: 8080
+必要条件
+このアプリケーションを実行するには、以下が必要です：
 
-This Docker Compose application provides:
+Docker Engine
+Docker Compose
+使い方
+クイックスタート
+リポジトリをクローンします:
 
-- **Kali Linux**: A web server running NoVNC with Kali Linux Desktop environment.
-  - Default password: `kalilinux`
-  - Default exposed port: `8080`
+bash
+git clone https://github.com/csalab-id/kalilinux-docker.git
+リポジトリのディレクトリに移動します:
 
-## Requirements
+bash
+cd kalilinux-docker
+必要なDockerイメージをプルします:
 
-To run this application, you need:
+bash
+docker compose pull
+環境用にカスタムパスワードを設定します（任意）:
 
-- Docker Engine
-- Docker Compose
+bash
+export PASSWORD="YourVNCPassword"
+コンテナをデタッチモードで起動します:
 
-## Usage
+bash
+docker compose up -d
+ウェブアプリケーションにアクセスします: http://localhost:8080/vnc.html
 
-### Quick Start
+環境変数
+次の環境変数でアプリケーションをカスタマイズできます：
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/csalab-id/kalilinux-docker.git
-   ```
+変数名	説明	デフォルト
+PASSWORD	VNCのパスワード	kalilinux
+BIND	サーバーのバインドアドレスとポート（形式: IP:PORT）	0.0.0.0:8080
+使用例:
 
-2. Navigate to the repository directory:
-   ```bash
-   cd kalilinux-docker
-   ```
-
-3. Pull the required Docker images:
-   ```bash
-   docker compose pull
-   ```
-
-4. Set a custom password for the environment (optional):
-   ```bash
-   export PASSWORD="YourVNCPassword"
-   ```
-
-5. Start the containers in detached mode:
-   ```bash
-   docker compose up -d
-   ```
-
-6. Access the web application at: http://localhost:8080/vnc.html
-
-## Environment Variables
-
-You can customize the application using these environment variables:
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `PASSWORD` | VNC password | `kalilinux` |
-| `BIND` | Address and port to bind the server (format: IP:PORT) | `0.0.0.0:8080` |
-
-Example usage:
-```bash
+bash
 export PASSWORD="mysecretpassword"
 export BIND="0.0.0.0:9090"
 docker compose up -d
-```
+ライセンス
+このDocker ComposeアプリケーションはMITライセンスのもとで公開されています。詳細はLICENSEファイルをご覧ください。
 
-## License
-
-This Docker Compose application is released under the MIT License. See the [LICENSE](https://www.mit.edu/~amini/LICENSE.md) file for details.
-
-## Disclaimer
-
-The software developed and distributed for hacking purposes is intended for **educational and testing purposes only**. The use of this software for any illegal activity is strictly prohibited. The developers and distributors of the software are not liable for any damages or legal consequences resulting from the misuse of the software.
+免責事項
+ハッキング目的で開発・配布される本ソフトウェアは、教育およびテスト目的のみでの利用を意図しています。本ソフトウェアを違法な活動に使用することは固く禁止されています。開発者および配布者は、本ソフトウェアの誤用によるいかなる損害や法的責任についても責任を負いません。
