@@ -44,4 +44,29 @@ RUN apt-get -y autoremove && \
     useradd -m -c "Kali Linux" -s /bin/bash -d /home/kali kali && \
     sed -i "s/#ListenAddress 0.0.0.0/ListenAddress 0.0.0.0/g" /etc/ssh/sshd_config && \
     sed -i "s/off/remote/g" /usr/share/novnc/app/ui.js || true && \
-    ech
+    echo "kali ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
+    mkdir -p /run/dbus && \
+    ln -s /usr/bin/python3 /usr/bin/python || true && \
+    touch /usr/share/novnc/index.htm
+
+# スタートアップスクリプトの追加
+COPY startup.sh /startup.sh
+
+# ユーザー環境設定（日本語IMEと仮想環境）
+USER kali
+WORKDIR /home/kali
+RUN mkdir -p /home/kali/.config && \
+    virtualenv /home/kali/.config/app && \
+    echo "source /home/kali/.config/app/bin/activate" >> /home/kali/.bashrc && \
+    echo "export GTK_IM_MODULE=fcitx" >> /home/kali/.bashrc && \
+    echo "export QT_IM_MODULE=fcitx" >> /home/kali/.bashrc && \
+    echo "export XMODIFIERS=@im=fcitx" >> /home/kali/.bashrc && \
+    echo "export LANG=ja_JP.UTF-8" >> /home/kali/.bashrc && \
+    echo "export LANGUAGE=ja_JP:ja" >> /home/kali/.bashrc && \
+    echo "export LC_ALL=ja_JP.UTF-8" >> /home/kali/.bashrc
+
+# 起動環境変数とポート公開
+ENV PASSWORD=kalilinux
+ENV SHELL=/bin/bash
+EXPOSE 8080
+ENTRYPOINT ["/bin/bash", "/startup.sh"]
