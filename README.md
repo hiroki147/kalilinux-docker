@@ -32,7 +32,7 @@ To run this application, you need:
 
 2. Navigate to the repository directory:
    ```bash
-   cd kalilinux-docker
+   cd kalilinux-docker-japanese
    ```
 
 3. Pull the required Docker images:
