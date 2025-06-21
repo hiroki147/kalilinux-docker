@@ -27,7 +27,7 @@ To run this application, you need:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/csalab-id/kalilinux-docker.git
+   git clone https://github.com/hiroki/kalilinux-docker.git
    ```
 
 2. Navigate to the repository directory:
