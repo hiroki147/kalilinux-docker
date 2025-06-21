@@ -1,5 +1,6 @@
 # Kali Linux Desktop on the Browser
 
+日本語化済みです
 This repository contains a Docker Compose application that runs a Kali Linux desktop accessible through your web browser via NoVNC.
 
 ![Screenshot](.github/images/screenshoot.png)
